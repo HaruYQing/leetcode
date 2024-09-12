@@ -1,9 +1,9 @@
-const nums = [2, 7, 11, 15];
-const target = 9;
+const nums = [3, 3];
+const target = 6;
 
 // hashmap：把 element 和 target 的 "差" 放入 object，後續看看有沒有 element 符合這些 "差"
-let checked = {};
 const twoSum = (nums, target) => {
+  let checked = {}; // 放在函數裡面，確保每次調用時是清空的
   for (let i = 0; i < nums.length; i++) {
     diff = target - nums[i];
     if (diff in checked) {
