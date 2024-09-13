@@ -9,9 +9,9 @@ let s = "[";
 // const isValid = (s) => {
 //   if (s.length % 2 !== 0) return false;
 //   if (
-//     s[s.lenth - 1] === "(" ||
-//     s[s.lenth - 1] === "[" ||
-//     s[s.lenth - 1] === "{"
+//     s[s.length - 1] === "(" ||
+//     s[s.length - 1] === "[" ||
+//     s[s.length - 1] === "{"
 //   )
 //     return false;
 //   if (s[0] === ")" || s[0] === "]" || s[0] === "}") return false;
@@ -21,7 +21,7 @@ let s = "[";
 //   for (let i = 0; i < s.length; i++) {
 //     if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
 //       stack.push(s[i]);
-//     } else if (pairs[stack.pop()] !== s[i]) {
+//     } else if (stack.length === 0 || pairs[stack.pop()] !== s[i]) {
 //       return false;
 //     }
 //   }
@@ -33,12 +33,14 @@ const isValid = (s) => {
   let stack = [];
 
   for (let i = 0; i < s.length; i++) {
-    if (s[i] == "(" || s[i] == "[" || s[i] == "{") {
+    if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
       stack.push(s[i]);
     } else {
+      if (stack.length === 0) return false; // 檢查 stack 是否為空
+
       switch (s[i]) {
         case ")":
-          if (stack[stack.length - 1] == "(") {
+          if (stack[stack.length - 1] === "(") {
             stack.pop();
           } else {
             return false;
@@ -46,7 +48,7 @@ const isValid = (s) => {
           break;
 
         case "]":
-          if (stack[stack.length - 1] == "[") {
+          if (stack[stack.length - 1] === "[") {
             stack.pop();
           } else {
             return false;
@@ -54,7 +56,7 @@ const isValid = (s) => {
           break;
 
         case "}":
-          if (stack[stack.length - 1] == "{") {
+          if (stack[stack.length - 1] === "{") {
             stack.pop();
           } else {
             return false;
